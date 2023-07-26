@@ -77,4 +77,6 @@ public class Fruit extends Physical {
             lastPosY = newPosY;
         }
     }
+
+    private void checkBlockCollision
 }
