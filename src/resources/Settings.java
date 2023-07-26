@@ -76,7 +76,7 @@ public class Settings {
         private Images(String name) {
             try {
                 value = ImageIO.read(
-                    new File("C:/Users/gabriel/Desktop/java-projects/snake-game-dev/res/" + name + ".png")
+                    new File("res/" + name + ".png")
                 );
             } catch (Exception e) {
                 e.printStackTrace();

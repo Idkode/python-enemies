@@ -1,6 +1,7 @@
 package model;
 
 import resources.Settings;
+import resources.Utils;
 
 import java.util.List;
 
@@ -35,5 +36,45 @@ public class Fruit extends Physical {
     }
 
     @Override
-    public void checkCollision(List<Physical> objects) {}
+    public void checkCollision(List<Physical> objects) {
+        for (Physical object : objects) {
+            if (object.getClass() == Snake.class) {
+                checkSnakeCollision((Snake)object);
+            }
+        }
+    }
+
+    private void checkSnakeCollision(Snake snake){
+        int centerPosX = (int)this.x;
+        int centerPosY = (int)this.y;
+
+        int lastPosX = snake.firstSegmentPositionX;
+        int lastPosY = snake.firstSegmentPositionY;
+        int newPosX;
+        int newPosY;
+
+        int numberOfSegments = snake.bodySegments.size() - 1;
+        int num = -1;
+
+        for (Snake.BodySegment bodySegment : snake.bodySegments) {
+            num++;
+
+            newPosX = Utils.incrementValueByDirection(
+                    bodySegment.getDirection(), Settings.Direction.LEFT, lastPosX, bodySegment.length);
+            newPosY = Utils.incrementValueByDirection(
+                    bodySegment.getDirection(), Settings.Direction.UP, lastPosY, bodySegment.length);
+
+            if (
+                    Utils.checkCollision(
+                            centerPosX, centerPosY,
+                            lastPosX, lastPosY,
+                            newPosX, newPosY
+                    ) && (numberOfSegments - 1) > num) {
+                onCollision(snake);
+            }
+
+            lastPosX = newPosX;
+            lastPosY = newPosY;
+        }
+    }
 }

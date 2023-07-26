@@ -252,7 +252,7 @@ public class Snake extends Physical {
             if (object == this) {
                 System.out.println("collision with itself");
             } else {
-                System.out.println("collision another snake");
+                System.out.println("collision with another snake");
             }
             isDead = true;
         }
