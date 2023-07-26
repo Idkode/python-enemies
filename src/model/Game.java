@@ -106,7 +106,7 @@ public class Game {
         Display.clear();
 
         /* scene */
-//        generateWalls();
+        generateWalls();
         generateFruits(1);
         generateSnakes(1);
     }
