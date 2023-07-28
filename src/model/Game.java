@@ -144,11 +144,19 @@ public class Game {
 
     public static void generateFruits(int numberOfFruits) {
         for (int i = 0; i < numberOfFruits; i++) {
-            int gridX = (int) (Settings.GRID_WIDTH * Math.random());
-            int gridY = (int) (Settings.GRID_HEIGHT * Math.random());
-            Fruit.Type type = Math.random() >= 0.1 ? Fruit.Type.NORMAL : Fruit.Type.GOLDEN;
-            Fruit fruit = new Fruit(gridX, gridY, type);
-            addObject(fruit);
+            Fruit fruit;
+            boolean invalid;
+            do {
+                int gridX = (int) (Settings.GRID_WIDTH * Math.random());
+                int gridY = (int) (Settings.GRID_HEIGHT * Math.random());
+                Fruit.Type type = Math.random() >= 0.1 ? Fruit.Type.NORMAL : Fruit.Type.GOLDEN;
+                fruit = new Fruit(gridX, gridY, type);
+                addObject(fruit);
+                invalid = fruit.invalidPosition(objects);
+                if(invalid){
+                    fruit.removeFromGame();
+                }
+            }while(invalid);
         }
     }
 

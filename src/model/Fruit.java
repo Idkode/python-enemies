@@ -44,7 +44,23 @@ public class Fruit extends Physical {
         }
     }
 
-    private void checkSnakeCollision(Snake snake){
+    public boolean invalidPosition(List<Physical> objects){
+        boolean a = false, b = false, c = false;
+        for (Physical object : objects) {
+            if (object.getClass() == Snake.class) {
+                a = checkSnakeCollision((Snake)object);
+            } else if (object.getClass() == Block.class) {
+                b = checkBlockCollision((Block)object);
+            }
+            else{
+                c = checkFruitCollision((Fruit) object);
+            }
+            if(a || b || c) return true;
+        }
+        return false;
+    }
+
+    private boolean checkSnakeCollision(Snake snake){
         int centerPosX = (int)this.x;
         int centerPosY = (int)this.y;
 
@@ -71,12 +87,19 @@ public class Fruit extends Physical {
                             newPosX, newPosY
                     ) && (numberOfSegments - 1) > num) {
                 onCollision(snake);
+                return true;
             }
 
             lastPosX = newPosX;
             lastPosY = newPosY;
         }
+        return false;
     }
 
-    private void checkBlockCollision
+    private boolean checkBlockCollision(Block block){
+        return ((int) this.x == (int) block.x) && ((int) this.y == (int) block.y);
+    }
+    private boolean checkFruitCollision(Fruit fruit){
+        return ((int) this.x == (int) fruit.x) && ((int) this.y == (int) fruit.y);
+    }
 }
