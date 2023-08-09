@@ -17,6 +17,9 @@ public class Snake extends Physical {
     public static final int SNAKE_OFFSET_GRID_X = 0;
     public static final int SNAKE_OFFSET_GRID_Y = 0;
 
+    /* Score */
+    int snakeScore = 0;
+
     /* Body length without counting with head */
     int snakeBodyLength = 1 * SNAKE_BODY_SEGMENT_SIZE;
     int snakeSpeed = 1;
@@ -245,6 +248,7 @@ public class Snake extends Physical {
     @Override
     public void onCollision(Physical object) {
         if (object.getClass() == Fruit.class) {
+            snakeScore += ((Fruit) object).getType().score;
             growth(SNAKE_BODY_SEGMENT_SIZE);
         } else if (object.getClass() == Block.class) {
             isDead = true;
@@ -295,5 +299,9 @@ public class Snake extends Physical {
                 else { length = 11; }
             }
         }
+    }
+
+    public int getScore(){
+        return snakeScore;
     }
 }

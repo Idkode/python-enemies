@@ -8,6 +8,9 @@ import view.Display;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.Random;
+
+import java.awt.Color;
 
 public class Game {
     public static boolean isRunning = false;
@@ -16,10 +19,12 @@ public class Game {
     static List<Physical> toRemoveQueue = new LinkedList<>();
     static List<Physical> toAddQueue = new LinkedList<>();
     static List<Physical> objects = new LinkedList<>();
-    static List<Snake> players = new LinkedList<>();
+    public static List<Snake> players = new LinkedList<>();
     static List<Block> walls = new LinkedList<>();
 
     public static Controller ctrl = new Controller();
+
+    static Random rand = new Random();
 
     public static void loop() {
         if (isRunning) {
@@ -180,4 +185,5 @@ public class Game {
             addObject(block2);
         }
     }
+
 }
