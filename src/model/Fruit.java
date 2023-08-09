@@ -37,33 +37,32 @@ public class Fruit extends Physical {
 
     @Override
     public void checkCollision(List<Physical> objects) {
-        for (Physical object : objects) {
-            if (object.getClass() == Snake.class) {
-                checkSnakeCollision((Snake)object);
-            }
-        }
+//        for (Physical object : objects) {
+//            if (object.getClass() == Snake.class) {
+//                checkSnakeCollision((Snake)object);
+//            }
+//        }
     }
 
-    public boolean invalidPosition(List<Physical> objects){
+    public boolean invalidPosition(int x, int y, List<Physical> objects){
         boolean a = false, b = false, c = false;
         for (Physical object : objects) {
             if (object.getClass() == Snake.class) {
-                a = checkSnakeCollision((Snake)object);
+                a = checkSnakeCollision(x, y,(Snake)object);
             } else if (object.getClass() == Block.class) {
-                b = checkBlockCollision((Block)object);
+                b = checkBlockCollision(x, y,(Block)object);
             }
             else{
-                c = checkFruitCollision((Fruit) object);
+                c = checkFruitCollision(x, y,(Fruit) object);
             }
             if(a || b || c) return true;
         }
         return false;
+//        return (this.x < Settings.GRID_UNIT_SIZE || this.x >= (Settings.GRID_WIDTH - 1) * Settings.GRID_UNIT_SIZE ||
+//                this.y < Settings.GRID_UNIT_SIZE || this.y >= (Settings.GRID_HEIGHT - 1) * Settings.GRID_UNIT_SIZE);
     }
 
-    private boolean checkSnakeCollision(Snake snake){
-        int centerPosX = (int)this.x;
-        int centerPosY = (int)this.y;
-
+    private boolean checkSnakeCollision(int x, int y, Snake snake){
         int lastPosX = snake.firstSegmentPositionX;
         int lastPosY = snake.firstSegmentPositionY;
         int newPosX;
@@ -82,11 +81,10 @@ public class Fruit extends Physical {
 
             if (
                     Utils.checkCollision(
-                            centerPosX, centerPosY,
+                            x, y,
                             lastPosX, lastPosY,
                             newPosX, newPosY
                     ) && (numberOfSegments - 1) > num) {
-                onCollision(snake);
                 return true;
             }
 
@@ -96,10 +94,10 @@ public class Fruit extends Physical {
         return false;
     }
 
-    private boolean checkBlockCollision(Block block){
-        return ((int) this.x == (int) block.x) && ((int) this.y == (int) block.y);
+    private boolean checkBlockCollision(int x, int y, Block block){
+        return x == (int) block.x && y == (int) block.y;
     }
-    private boolean checkFruitCollision(Fruit fruit){
-        return ((int) this.x == (int) fruit.x) && ((int) this.y == (int) fruit.y);
+    private boolean checkFruitCollision(int x, int y, Fruit fruit){
+        return x == (int) fruit.x && y == (int) fruit.y;
     }
 }
