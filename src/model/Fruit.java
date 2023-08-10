@@ -78,7 +78,8 @@ public class Fruit extends Physical {
                     bodySegment.getDirection(), Settings.Direction.LEFT, lastPosX, bodySegment.length);
             newPosY = Utils.incrementValueByDirection(
                     bodySegment.getDirection(), Settings.Direction.UP, lastPosY, bodySegment.length);
-
+            newPosX -= newPosX % Settings.GRID_UNIT_SIZE;
+            newPosY -= newPosY % Settings.GRID_UNIT_SIZE;
             if (
                     Utils.checkCollision(
                             x, y,

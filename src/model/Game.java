@@ -4,6 +4,7 @@ import controller.Controller;
 import controller.Controller.ControlType;
 import resources.Settings;
 import view.Display;
+import view.Window;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -30,12 +31,13 @@ public class Game {
         if (isRunning) {
             handleController();
             handleObjects();
+            loopObjects();
         } else {
             /* Game Over */
             System.out.println("Game Over");
+            Window.gameThread.stop();
         }
 
-        loopObjects();
     }
 
     public static Controller getController() {
@@ -112,8 +114,8 @@ public class Game {
 
         /* scene */
         generateWalls();
-        generateFruits(1);
         generateSnakes(1);
+        generateFruits(1);
     }
 
     public static void generateSnakes(int numberOfPlayers) {
@@ -184,6 +186,10 @@ public class Game {
             walls.add(block2);
             addObject(block2);
         }
+        Block block = new Block(7,7);
+        walls.add(block);
+        addObject(block);
+        handleObjects();
     }
 
 }
