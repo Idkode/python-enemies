@@ -25,23 +25,25 @@ public class DisplayFruitMethod {
     private static void drawFruit(Graphics2D graphics, Fruit object) {
         final Image img = switch (object.getType()) {
             case NORMAL -> Settings.Images.APPLE.value;
+            case CHERRY -> Settings.Images.CHERRY.value;
+            case STRAWBERRY -> Settings.Images.STRAWBERRY.value;
             case GOLDEN -> Settings.Images.GOLDEN_APPLE.value;
         };
 
         graphics.setColor(Settings.Colors.TRANSPARENT_SHADOW.value);
         graphics.fillOval(
-            (int) object.getX() + OFFSIDE_X,
-            (int) object.getY() + OFFSIDE_Y,
-            (int) object.getWidth() / 2,
-            (int) object.getHeight() / 2
+                (int) object.getX() + OFFSIDE_X,
+                (int) object.getY() + OFFSIDE_Y,
+                (int) object.getWidth() / 2,
+                (int) object.getHeight() / 2
         );
         graphics.drawImage(
-            img,
-            (int)(object.getX()),
-            (int)(object.getY()),
-            (int)(object.getWidth()),
-            (int)(object.getHeight()),
-            null
+                img,
+                (int)(object.getX()),
+                (int)(object.getY()),
+                (int)(object.getWidth()),
+                (int)(object.getHeight()),
+                null
         );
     }
 }

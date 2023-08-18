@@ -9,7 +9,7 @@ public class Fruit extends Physical {
     public static final int SIZE = (35 * Settings.GRID_UNIT_SIZE /30);
 
     public enum Type {
-        NORMAL(1), GOLDEN(10);
+        NORMAL(1), CHERRY(3), STRAWBERRY(5), GOLDEN(10);
         final int score;
         private Type(int score) { this.score = score; }
     }
