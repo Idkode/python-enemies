@@ -120,11 +120,11 @@ public class Game {
         if (numberOfPlayers <= 0) return;
 
         Snake snake = new Snake(
-            1, 1,
-            Settings.Direction.RIGHT,
-            Settings.SnakeColors.HEAD_PURPLE.value,
-            Settings.SnakeColors.TAIL_PURPLE.value,
-            ControlType.ARROWS
+                1, 1,
+                Settings.Direction.RIGHT,
+                Settings.SnakeColors.HEAD_PURPLE.value,
+                Settings.SnakeColors.TAIL_PURPLE.value,
+                ControlType.ARROWS
         );
         addObject(snake);
         players.add(snake);
@@ -132,11 +132,11 @@ public class Game {
         if (numberOfPlayers <= 1) return;
 
         Snake snake2 = new Snake(
-            Settings.GRID_WIDTH - 2, Settings.GRID_HEIGHT - 2,
-            Settings.Direction.LEFT,
-            Settings.SnakeColors.TAIL_GREEN.value,
-            Settings.SnakeColors.HEAD_GREEN.value,
-            ControlType.WASD
+                Settings.GRID_WIDTH - 2, Settings.GRID_HEIGHT - 2,
+                Settings.Direction.LEFT,
+                Settings.SnakeColors.TAIL_GREEN.value,
+                Settings.SnakeColors.HEAD_GREEN.value,
+                ControlType.WASD
         );
         addObject(snake2);
         players.add(snake2);
@@ -151,7 +151,11 @@ public class Game {
         for (int i = 0; i < numberOfFruits; i++) {
             boolean invalid;
             int gridX, gridY;
-            Fruit.Type type = Math.random() >= 0.1 ? Fruit.Type.NORMAL : Fruit.Type.GOLDEN;
+
+            double random_num = Math.random();
+
+            Fruit.Type type = random_num >= 0.5 ? Fruit.Type.NORMAL : random_num >= 0.3 ? Fruit.Type.CHERRY : random_num >= 0.1 ? Fruit.Type.STRAWBERRY : Fruit.Type.GOLDEN;
+
             Fruit fruit = new Fruit(0, 0, type);
             do {
                 gridX = (int) (Settings.GRID_UNIT_SIZE * Settings.GRID_WIDTH * Math.random());

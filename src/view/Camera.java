@@ -23,7 +23,7 @@ public class Camera extends JPanel {
         g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 28));
         int scoreY = 2*Settings.GRID_UNIT_SIZE -3;
         for (Snake player: Game.players) {
-            g2d.setColor(player.headColor);
+            g2d.setColor(Color.BLACK);
             g2d.drawString(String.valueOf(player.getScore()), 35, scoreY);
             scoreY += Settings.GRID_UNIT_SIZE;
 

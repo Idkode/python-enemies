@@ -70,13 +70,16 @@ public class Settings {
 
     public enum Images {
         APPLE("apple"),
+        CHERRY("cherry"),
+        STRAWBERRY("strawberry"),
         GOLDEN_APPLE("golden-apple");
+
 
         public Image value;
         private Images(String name) {
             try {
                 value = ImageIO.read(
-                    new File("res/" + name + ".png")
+                        new File("res/" + name + ".png")
                 );
             } catch (Exception e) {
                 e.printStackTrace();
