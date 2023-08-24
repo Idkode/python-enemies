@@ -48,7 +48,7 @@ public class Fruit extends Physical {
         boolean a = false, b = false, c = false;
         for (Physical object : objects) {
             if (object.getClass() == Snake.class) {
-                a = checkSnakeCollision(x, y,(Snake)object);
+                continue;
             } else if (object.getClass() == Block.class) {
                 b = checkBlockCollision(x, y,(Block)object);
             }
@@ -62,38 +62,7 @@ public class Fruit extends Physical {
 //                this.y < Settings.GRID_UNIT_SIZE || this.y >= (Settings.GRID_HEIGHT - 1) * Settings.GRID_UNIT_SIZE);
     }
 
-    private boolean checkSnakeCollision(int x, int y, Snake snake){
-        int lastPosX = snake.firstSegmentPositionX;
-        int lastPosY = snake.firstSegmentPositionY;
-        int newPosX;
-        int newPosY;
-
-        int numberOfSegments = snake.bodySegments.size() - 1;
-        int num = -1;
-
-        for (Snake.BodySegment bodySegment : snake.bodySegments) {
-            num++;
-
-            newPosX = Utils.incrementValueByDirection(
-                    bodySegment.getDirection(), Settings.Direction.LEFT, lastPosX, bodySegment.length);
-            newPosY = Utils.incrementValueByDirection(
-                    bodySegment.getDirection(), Settings.Direction.UP, lastPosY, bodySegment.length);
-            newPosX -= newPosX % Settings.GRID_UNIT_SIZE;
-            newPosY -= newPosY % Settings.GRID_UNIT_SIZE;
-            if (
-                    Utils.checkCollision(
-                            x, y,
-                            lastPosX, lastPosY,
-                            newPosX, newPosY
-                    ) && (numberOfSegments - 1) > num) {
-                return true;
-            }
-
-            lastPosX = newPosX;
-            lastPosY = newPosY;
-        }
-        return false;
-    }
+//    private boolean checkSnakeCollision(int x, int y, Snake snake);  Descontinuado.
 
     private boolean checkBlockCollision(int x, int y, Block block){
         return x == (int) block.x && y == (int) block.y;
