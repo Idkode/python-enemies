@@ -252,6 +252,7 @@ public class Snake extends Physical {
             growth(SNAKE_BODY_SEGMENT_SIZE);
         } else if (object.getClass() == Block.class) {
             isDead = true;
+            Game.isRunning = false;
         } else if (object.getClass() == Snake.class) {
             if (object == this) {
                 System.out.println("collision with itself");
@@ -259,6 +260,7 @@ public class Snake extends Physical {
                 System.out.println("collision with another snake");
             }
             isDead = true;
+            Game.isRunning = false;
         }
     }
 
