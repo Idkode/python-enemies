@@ -3,6 +3,7 @@ package model;
 import controller.Controller;
 import controller.Controller.ControlType;
 import resources.Settings;
+import resources.Sound;
 import view.Display;
 import view.Window;
 
@@ -34,6 +35,7 @@ public class Game {
             loopObjects();
         } else {
             /* Game Over */
+            Sound.DEATH.play();
             System.out.println("Game Over");
             Window.gameThread.stop();
         }
@@ -165,7 +167,6 @@ public class Game {
                 gridY = (int) (Settings.GRID_UNIT_SIZE * Settings.GRID_HEIGHT * Math.random());
                 gridY -= gridY % Settings.GRID_UNIT_SIZE;
                 invalid = fruit.invalidPosition(gridX, gridY, objects);
-                System.out.println(String.format("fruta %d %d", gridX, gridY));
             }while (invalid);
             fruit.x = gridX;
             fruit.y = gridY;

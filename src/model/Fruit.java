@@ -1,6 +1,7 @@
 package model;
 
 import resources.Settings;
+import resources.Sound;
 import resources.Utils;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class Fruit extends Physical {
     public enum Type {
         NORMAL(1), CHERRY(3), STRAWBERRY(5), GOLDEN(10);
         final int score;
-        private Type(int score) { this.score = score; }
+        Type(int score) { this.score = score; }
     }
 
     private final Type type;
@@ -31,18 +32,13 @@ public class Fruit extends Physical {
     public void onCollision(Physical object) {
         if (object.getClass() == Snake.class) {
             this.removeFromGame();
+            Sound.COIN.play();
             Game.generateFruits(1);
         }
     }
 
     @Override
-    public void checkCollision(List<Physical> objects) {
-//        for (Physical object : objects) {
-//            if (object.getClass() == Snake.class) {
-//                checkSnakeCollision((Snake)object);
-//            }
-//        }
-    }
+    public void checkCollision(List<Physical> objects) {}
 
     public boolean invalidPosition(int x, int y, List<Physical> objects){
         boolean a = false, b = false, c = false;
@@ -58,11 +54,7 @@ public class Fruit extends Physical {
             if(a || b || c) return true;
         }
         return false;
-//        return (this.x < Settings.GRID_UNIT_SIZE || this.x >= (Settings.GRID_WIDTH - 1) * Settings.GRID_UNIT_SIZE ||
-//                this.y < Settings.GRID_UNIT_SIZE || this.y >= (Settings.GRID_HEIGHT - 1) * Settings.GRID_UNIT_SIZE);
     }
-
-//    private boolean checkSnakeCollision(int x, int y, Snake snake);  Descontinuado.
 
     private boolean checkBlockCollision(int x, int y, Block block){
         return x == (int) block.x && y == (int) block.y;

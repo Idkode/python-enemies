@@ -3,6 +3,7 @@ package model;
 import controller.Controller;
 import resources.Settings;
 import resources.Settings.Direction;
+import resources.Sound;
 import resources.Utils;
 import utils.Pair;
 
